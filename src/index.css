@@ -1,1 +1,139 @@
 @import "tailwindcss";
+
+/* Restaurant App Design Tokens */
+:root {
+  /* Primary */
+  --color-primary: #c2593f;
+  --color-primary-hover: #a84630;
+  --color-primary-light: #f3d4cb;
+  --color-on-primary: #ffffff;
+
+  /* Secondary */
+  --color-secondary: #587065;
+  --color-secondary-hover: #43584e;
+  --color-secondary-light: #d1e4da;
+  --color-on-secondary: #ffffff;
+
+  /* Tertiary */
+  --color-tertiary: #d4a373;
+  --color-tertiary-light: #f4e0ca;
+  --color-on-tertiary: #292524;
+
+  /* Neutral */
+  --color-background: #f5edea;
+  --color-surface: #f8f0ed;
+  --color-surface-elevated: #ffffff;
+  --color-text: #292524;
+  --color-text-muted: #786963;
+  --color-border: #e3d3cd;
+
+  /* Status */
+  --color-success: #38765b;
+  --color-warning: #b7791f;
+  --color-error: #c62828;
+  --color-info: #386fa4;
+
+  /* Typography */
+  --font-heading: "Newsreader", serif;
+  --font-body: "Hanken Grotesk", sans-serif;
+
+  /* Spacing */
+  --space-section: 4rem;
+  --space-card: 1.25rem;
+
+  /* Shape and effects */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-card: 0 4px 16px rgb(41 37 36 / 6%);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --color-primary: #d96852;
+  --color-primary-hover: #e77a63;
+  --color-primary-light: #56291f;
+  --color-on-primary: #211d1c;
+
+  --color-secondary: #e07a62;
+  --color-secondary-hover: #ee927c;
+  --color-secondary-light: #542a23;
+  --color-on-secondary: #211d1c;
+
+  --color-tertiary: #d5c3b8;
+  --color-tertiary-light: #39312e;
+  --color-on-tertiary: #211d1c;
+
+  --color-background: #151313;
+  --color-surface: #211e1d;
+  --color-surface-elevated: #2a2625;
+  --color-text: #f5edea;
+  --color-text-muted: #b9aaa4;
+  --color-border: #403735;
+
+  --color-success: #80b89a;
+  --color-warning: #e6b566;
+  --color-error: #f28b82;
+  --color-info: #8ab4e8;
+
+  --shadow-card: 0 4px 16px rgb(0 0 0 / 20%);
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-light: var(--color-primary-light);
+  --color-on-primary: var(--color-on-primary);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-secondary-light: var(--color-secondary-light);
+  --color-on-secondary: var(--color-on-secondary);
+
+  --color-tertiary: var(--color-tertiary);
+  --color-tertiary-light: var(--color-tertiary-light);
+  --color-on-tertiary: var(--color-on-tertiary);
+
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-border: var(--color-border);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+/* Global defaults */
+@layer base {
+  html {
+    font-family: var(--font-body);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}

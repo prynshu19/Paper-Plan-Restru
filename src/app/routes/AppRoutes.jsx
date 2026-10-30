@@ -1,12 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import App from "../../App";
+import Login from "../../features/auth/ui/pages/Login";
+import Register from "../../features/auth/ui/pages/Register";
 
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <App />,
+      element: <Login />,
     },
+    {
+      path: "/register",
+      element: <Register/>
+    }
   ]);
 
   return <RouterProvider router={router} />;
