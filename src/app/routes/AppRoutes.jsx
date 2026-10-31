@@ -11,6 +11,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
 import About from "../../shared/ui/pages/About";
 import Contact from "../../shared/ui/pages/Contact";
+import Profile from "../../shared/ui/pages/Profile";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,10 @@ const AppRoutes = () => {
             {
               path: "/contact",
               element: <Contact />,
+            },
+            {
+              path: "/profile",
+              element: <Profile />,
             },
           ],
         },
