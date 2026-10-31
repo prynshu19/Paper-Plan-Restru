@@ -10,6 +10,7 @@ export const registerAction = createAsyncThunk(
       toast.success("Registered Successfully");
       return response.data;
     } catch (error) {
+      toast.error("Registration Failed");
       return thunkApi.rejectWithValue(error);
     }
   },
@@ -31,17 +32,15 @@ export const loginAction = createAsyncThunk(
 );
 
 export const hydrateUser = createAsyncThunk("/auth/me", async (_, thunkApi) => {
-  const token = localStorage.getItem("accessToken");
   try {
-    const response = await api.get("user/me", {
+    const token = localStorage.getItem("accessToken");
+    const response = await api.get("auth/me", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
-    toast.error("Hydration Failed");
     return thunkApi.rejectWithValue(error);
   }
 });

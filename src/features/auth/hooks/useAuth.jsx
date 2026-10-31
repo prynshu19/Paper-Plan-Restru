@@ -17,10 +17,12 @@ export const useAuth = () => {
 
   const loginHandler = (data) => {
     dispatch(loginAction(data));
+    reset();
   };
 
   const registerHandler = (data) => {
     dispatch(registerAction(data));
+    reset();
   };
 
   return {

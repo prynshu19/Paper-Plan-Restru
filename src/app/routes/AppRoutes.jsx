@@ -4,6 +4,9 @@ import Register from "../../features/auth/ui/pages/Register";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { hydrateUser } from "../../features/auth/state/authAction";
+import PublicRoutes from "./PublicRoutes";
+import Home from "../../shared/ui/pages/Home";
+import PrivateRoutes from "./PrivateRoutes";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -16,12 +19,27 @@ const AppRoutes = () => {
 
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Login />,
+      element: <PublicRoutes />,
+      children: [
+        {
+          path: "/",
+          element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+      ],
     },
+
     {
-      path: "/register",
-      element: <Register />,
+      element: <PrivateRoutes />,
+      children: [
+        {
+          path: "/home",
+          element: <Home />,
+        },
+      ],
     },
   ]);
 
