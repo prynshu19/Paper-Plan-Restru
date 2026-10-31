@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { loginHandler, useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 import ThemeToggle from "../../../../shared/ui/components/ThemeToggle";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { navigate, handleSubmit, register, errors } = useAuth();
+  const { navigate, handleSubmit, register, errors, loginHandler } = useAuth();
 
   return (
     <main className="min-h-screen bg-[var(--color-background)] p-0 font-[var(--font-body)] text-[var(--color-text)] sm:p-6 lg:p-10">

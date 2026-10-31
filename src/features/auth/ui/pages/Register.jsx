@@ -31,7 +31,8 @@ const benefits = [
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { navigate } = useAuth();
+  const { navigate, register, handleSubmit, errors, registerHandler } =
+    useAuth();
 
   return (
     <main className="min-h-screen bg-[var(--color-background)] px-4 py-6 font-[var(--font-body)] text-[var(--color-text)] sm:px-6 sm:py-9 lg:px-10">
@@ -175,44 +176,86 @@ const Register = () => {
           </div>
 
           {/* Form UI */}
-          <form
-            className="space-y-4"
-            onSubmit={(event) => event.preventDefault()}
-          >
+          <form className="space-y-4" onSubmit={handleSubmit(registerHandler)}>
             {/* First and Last Name */}
+
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
-                <label
-                  htmlFor="firstName"
-                  className="mb-2 block text-[9px] font-semibold tracking-wide uppercase"
-                >
-                  First Name
-                </label>
+                <div>
+                  <label
+                    htmlFor="firstName"
+                    className="mb-2 block text-[9px] font-semibold tracking-wide uppercase"
+                  >
+                    First Name
+                  </label>
 
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  placeholder="Eleanor"
-                  className="w-full rounded-sm border border-transparent bg-[var(--color-surface)] px-3 py-3 text-xs outline-none transition-colors placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)]"
-                />
+                  <input
+                    {...register("firstName", {
+                      required: "First name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/,
+                        message: "Enter a valid first name",
+                      },
+                      minLength: {
+                        value: 2,
+                        message: "First name must be at least 2 characters",
+                      },
+                      maxLength: {
+                        value: 50,
+                        message: "First name cannot exceed 50 characters",
+                      },
+                    })}
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    placeholder="Eleanor"
+                    className="w-full rounded-sm border border-transparent bg-[var(--color-surface)] px-3 py-3 text-xs outline-none transition-colors placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)]"
+                  />
+                </div>
+                {errors.firstName && (
+                  <p className="text-sm text-red-500">
+                    {errors.firstName.message}
+                  </p>
+                )}
               </div>
 
               <div>
-                <label
-                  htmlFor="lastName"
-                  className="mb-2 block text-[9px] font-semibold tracking-wide uppercase"
-                >
-                  Last Name
-                </label>
+                <div>
+                  <label
+                    htmlFor="lastName"
+                    className="mb-2 block text-[9px] font-semibold tracking-wide uppercase"
+                  >
+                    Last Name
+                  </label>
 
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  placeholder="Vance"
-                  className="w-full rounded-sm border border-transparent bg-[var(--color-surface)] px-3 py-3 text-xs outline-none transition-colors placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)]"
-                />
+                  <input
+                    {...register("lastName", {
+                      required: "Last name is required",
+                      pattern: {
+                        value: /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/,
+                        message: "Enter a valid last name",
+                      },
+                      minLength: {
+                        value: 2,
+                        message: "Last name must be at least 2 characters",
+                      },
+                      maxLength: {
+                        value: 50,
+                        message: "Last name cannot exceed 50 characters",
+                      },
+                    })}
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    placeholder="Vance"
+                    className="w-full rounded-sm border border-transparent bg-[var(--color-surface)] px-3 py-3 text-xs outline-none transition-colors placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)]"
+                  />
+                </div>
+                {errors.lastName && (
+                  <p className="text-sm text-red-500">
+                    {errors.lastName.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -231,6 +274,13 @@ const Register = () => {
                 </span>
 
                 <input
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                      message: "Please enter a valid email address",
+                    },
+                  })}
                   id="registerEmail"
                   name="email"
                   type="email"
@@ -240,6 +290,9 @@ const Register = () => {
               </div>
             </div>
 
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
             {/* Phone */}
             <div>
               <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
@@ -261,6 +314,13 @@ const Register = () => {
                 </span>
 
                 <input
+                  {...register("phone", {
+                    required: "Phone number is required",
+                    pattern: {
+                      value: /^[6-9]\d{9}$/,
+                      message: "Enter a valid 10-digit Indian mobile number",
+                    },
+                  })}
                   id="phone"
                   name="phone"
                   type="tel"
@@ -269,6 +329,10 @@ const Register = () => {
                 />
               </div>
             </div>
+
+            {errors.phone && (
+              <p className="text-sm text-red-500">{errors.phone.message}</p>
+            )}
 
             {/* Password */}
             <div>
@@ -291,6 +355,19 @@ const Register = () => {
                 </span>
 
                 <input
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must contain at least 8 characters",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message:
+                        "Include uppercase, lowercase, number and special character",
+                    },
+                  })}
                   id="registerPassword"
                   name="password"
                   type={showPassword ? "text" : "password"}
@@ -309,23 +386,16 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Email Invitations */}
-            <label className="flex cursor-pointer items-start gap-2.5 text-[10px] leading-relaxed text-[var(--color-text-muted)]">
-              <input
-                type="checkbox"
-                defaultChecked
-                className="mt-0.5 size-3 shrink-0 accent-[var(--color-primary)]"
-              />
-
-              <span>
-                Receive private invitations to seasonal tasting menus, cellar
-                previews, and winemaker salons.
-              </span>
-            </label>
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
 
             {/* Terms */}
             <label className="flex cursor-pointer items-start gap-2.5 text-[10px] leading-relaxed text-[var(--color-text-muted)]">
               <input
+                {...register("terms", {
+                  required: "You must accept the Terms & Conditions",
+                })}
                 type="checkbox"
                 className="mt-0.5 size-3 shrink-0 accent-[var(--color-primary)]"
               />
@@ -348,6 +418,9 @@ const Register = () => {
                 .
               </span>
             </label>
+            {errors.terms && (
+              <p className="text-sm text-red-500">{errors.terms.message}</p>
+            )}
 
             {/* Submit: UI Only */}
             <button
