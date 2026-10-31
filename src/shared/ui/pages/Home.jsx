@@ -63,7 +63,7 @@ const Home = () => {
 
           <div className="group relative aspect-[16/9] overflow-hidden rounded-2xl border-4 border-[var(--color-surface-elevated)] shadow-2xl">
             <video
-              src="../../../../public/hero_video.webm"
+              src="/hero_video.webm"
               autoPlay
               muted
               loop
