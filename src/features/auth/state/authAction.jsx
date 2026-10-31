@@ -10,11 +10,32 @@ export const registerAction = createAsyncThunk(
       toast.success("Registered Successfully");
       return response.data;
     } catch (error) {
+      toast.error("Registration Failed");
       return thunkApi.rejectWithValue(error);
     }
   },
 );
 
-export const loginAction = createAsyncThunk("/login/auth",async(data,thunkApi)=>{
-    const response = await api.post("user/login")
-})
+export const loginAction = createAsyncThunk(
+  "/login/auth",
+  async (data, thunkApi) => {
+    try {
+      const response = await api.post("user/login", data);
+      toast.success("Login SuccessFull");
+      localStorage.setItem("accessToken", response.data.accessToken);
+      return response.data;
+    } catch (error) {
+      toast.error("Login Failed");
+      return thunkApi.rejectWithValue(error);
+    }
+  },
+);
+
+export const hydrateUser = createAsyncThunk("/auth/me", async (_, thunkApi) => {
+  try {
+    
+  } catch (error) {
+      toast.error("Hydration Failed");
+    return thunkApi.rejectWithValue(error);
+  }
+});

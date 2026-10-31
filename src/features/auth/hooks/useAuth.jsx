@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { registerAction } from "../state/authAction";
+import { loginAction, registerAction } from "../state/authAction";
 import { addUser } from "../state/authSlice";
 
 export const useAuth = () => {
@@ -16,11 +16,10 @@ export const useAuth = () => {
   } = useForm();
 
   const loginHandler = (data) => {
-    console.log("Login data: ", data);
+    dispatch(loginAction(data));
   };
 
   const registerHandler = (data) => {
-    console.log("Register Data: ", data);
     dispatch(registerAction(data));
   };
 
