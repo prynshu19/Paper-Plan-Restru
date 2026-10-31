@@ -9,6 +9,8 @@ import Home from "../../shared/ui/pages/Home";
 import PrivateRoutes from "./PrivateRoutes";
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
+import About from "../../shared/ui/pages/About";
+import Contact from "../../shared/ui/pages/Contact";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -48,6 +50,14 @@ const AppRoutes = () => {
             {
               path: "/home",
               element: <Home />,
+            },
+            {
+              path: "/about",
+              element: <About />,
+            },
+            {
+              path: "/contact",
+              element: <Contact />,
             },
           ],
         },
