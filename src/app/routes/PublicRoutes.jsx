@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router";
+import HomeSkeleton from "../../shared/ui/components/HomeSkeleton";
 
 const PublicRoutes = () => {
   const { user, isLoading } = useSelector((store) => store.auth);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <HomeSkeleton />;
   }
 
   if (user) {

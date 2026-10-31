@@ -7,6 +7,8 @@ import { hydrateUser } from "../../features/auth/state/authAction";
 import PublicRoutes from "./PublicRoutes";
 import Home from "../../shared/ui/pages/Home";
 import PrivateRoutes from "./PrivateRoutes";
+import AuthLayout from "../layouts/AuthLayout";
+import MainLayout from "../layouts/MainLayout";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -19,25 +21,35 @@ const AppRoutes = () => {
 
   const router = createBrowserRouter([
     {
-      element: <PublicRoutes />,
+      element: <AuthLayout />,
       children: [
         {
-          path: "/",
-          element: <Login />,
-        },
-        {
-          path: "/register",
-          element: <Register />,
+          element: <PublicRoutes />,
+          children: [
+            {
+              path: "/",
+              element: <Login />,
+            },
+            {
+              path: "/register",
+              element: <Register />,
+            },
+          ],
         },
       ],
     },
 
     {
-      element: <PrivateRoutes />,
+      element: <MainLayout />,
       children: [
         {
-          path: "/home",
-          element: <Home />,
+          element: <PrivateRoutes />,
+          children: [
+            {
+              path: "/home",
+              element: <Home />,
+            },
+          ],
         },
       ],
     },
