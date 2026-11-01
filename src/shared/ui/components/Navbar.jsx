@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
 import ThemeToggle from "./ThemeToggle";
+import CommonButton from "./CommonButton";
+import { logoutUser } from "../../../features/auth/state/authSlice";
+import { useDispatch } from "react-redux";
+import {toast} from "react-toastify"
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -12,6 +16,7 @@ const navigation = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const navLinkClass = ({ isActive }) =>
     `relative py-2 text-xs font-medium transition-colors ${
@@ -19,6 +24,11 @@ const Navbar = () => {
         ? "text-[var(--color-primary)]"
         : "text-[var(--color-text-muted)] hover:text-[var(--color-primary)]"
     }`;
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    toast.error("User Logged Out")
+  };
 
   return (
     <header className="relative z-30 border-b border-[var(--color-border)]/70 bg-[var(--color-background)]/95">
@@ -51,6 +61,13 @@ const Navbar = () => {
               {item.name}
             </NavLink>
           ))}
+          <CommonButton
+            title={"Logout"}
+            className={
+              "text-xl py-1 px-2 text-white cursor-pointer bg-[var(--color-primary)] rounded"
+            }
+            onClick={handleLogout}
+          />
         </div>
 
         {/* Profile and Mobile Menu */}
@@ -101,6 +118,13 @@ const Navbar = () => {
                 {item.name}
               </NavLink>
             ))}
+            <CommonButton
+              title={"Logout"}
+              className={
+                "text-xl py-1 px-2 text-white cursor-pointer bg-[var(--color-primary)] rounded w-fit"
+              }
+              onClick={handleLogout}
+            />
           </div>
         </div>
       )}

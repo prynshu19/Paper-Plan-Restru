@@ -154,6 +154,7 @@ const Login = () => {
 
               <div className="flex items-center rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] transition-colors focus-within:border-[var(--color-primary)]">
                 <input
+                  value={"emilys"}
                   {...register("username", {
                     required: "Email or Username is required",
                   })}
@@ -192,6 +193,7 @@ const Login = () => {
 
               <div className="flex items-center rounded-sm border border-[var(--color-border)] bg-[var(--color-surface)] transition-colors focus-within:border-[var(--color-primary)]">
                 <input
+                  value={"emilyspass"}
                   {...register("password", {
                     required: "Password is required",
                     // minLength: {
