@@ -12,6 +12,9 @@ import MainLayout from "../layouts/MainLayout";
 import About from "../../shared/ui/pages/About";
 import Contact from "../../shared/ui/pages/Contact";
 import Profile from "../../shared/ui/pages/Profile";
+import { getProducts } from "../../features/menu/api/menuApi";
+import Menu from "../../features/menu/ui/pages/Menu";
+import Cart from "../../features/cart/ui/pages/Cart";
 
 const AppRoutes = () => {
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ const AppRoutes = () => {
   useEffect(() => {
     (() => {
       dispatch(hydrateUser());
+      getProducts();
     })();
   }, []);
 
@@ -63,6 +67,14 @@ const AppRoutes = () => {
             {
               path: "/profile",
               element: <Profile />,
+            },
+            {
+              path: "/menu",
+              element: <Menu />,
+            },
+            {
+              path: "/cart",
+              element: <Cart />,
             },
           ],
         },
