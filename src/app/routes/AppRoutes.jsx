@@ -22,7 +22,6 @@ const AppRoutes = () => {
   useEffect(() => {
     (() => {
       dispatch(hydrateUser());
-      getProducts();
     })();
   }, []);
 

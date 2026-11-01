@@ -1,4 +1,4 @@
-export const menu = [
+export const menuItem = [
   { recipeId: 1, price: 450, category: "Italian", isAvailable: true },
   { recipeId: 2, price: 140, category: "Asian", isAvailable: true },
   { recipeId: 3, price: 320, category: "American", isAvailable: true },

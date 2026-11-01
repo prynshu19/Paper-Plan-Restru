@@ -1,6 +1,6 @@
 import { api } from "../../../config/axiosInstance";
 
-export const getProducts = async () => {
-  const response = await api.get(`recipes?limit=${50}`);
-  console.log(response.data.recipes);
+export const getProducts = async (limit, page) => {
+  const response = await api.get(`recipes?limit=${limit}&skip=${page * limit}`);
+  return response.data;
 };
